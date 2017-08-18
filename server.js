@@ -15,6 +15,11 @@ io.on('connection', function (socket) {
        This function will be called for EACH browser that connects to our server. */
     console.log('A new client has connected!');
     console.log(socket.id);
+
+    socket.on('draw', function(...payloads){
+        socket.broadcast.emit('otherDrawing', ...payloads);
+    })
+
 });
 
 app.use(express.static(path.join(__dirname, 'browser')));
